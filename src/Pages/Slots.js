@@ -108,7 +108,7 @@ const Slots = () => {
   useEffect(() => {
     const fetchSlots = async () => {
       try {
-        const response = await fetch("http://localhost:5000/slots");
+        const response = await fetch("https://virtual-backend-4.onrender.com/slots");
         const data = await response.json();
 
         if (response.ok) {
@@ -149,7 +149,7 @@ const Slots = () => {
     if (!confirmBooking) return;
 
     try {
-      const response = await fetch("http://localhost:5000/book-slot", {
+      const response = await fetch("https://virtual-backend-4.onrender.com/book-slot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slotId, email: userEmail }),

@@ -395,7 +395,7 @@ const Contact = () => {
     formDataToSubmit.append("file", formData.file);
 
     try {
-      const response = await fetch("http://localhost:5000/contact", {
+      const response = await fetch("https://virtual-backend-4.onrender.com/contact", {
         method: "POST",
         body: formDataToSubmit,
       });

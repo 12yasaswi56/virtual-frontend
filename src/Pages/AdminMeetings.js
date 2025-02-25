@@ -76,7 +76,7 @@ const AdminMeetings = () => {
       return;
     }
 
-    fetch("http://localhost:5000/AdminMeetings")
+    fetch("https://virtual-backend-4.onrender.com/AdminMeetings")
       .then((res) => res.json())
       .then((data) => {
         // Ensure the data is an array

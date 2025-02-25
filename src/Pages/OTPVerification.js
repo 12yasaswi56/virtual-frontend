@@ -24,7 +24,7 @@ const OTPVerification = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/verify-otp", {
+            const response = await fetch("https://virtual-backend-4.onrender.com/verify-otp", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, otp }),

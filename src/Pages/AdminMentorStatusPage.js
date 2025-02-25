@@ -117,7 +117,7 @@ const AdminMentorStatusPage = () => {
     }
 
     // Fetch mentor applications
-    fetch("http://localhost:5000/mentor-applications")
+    fetch("https://virtual-backend-4.onrender.com/mentor-applications")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

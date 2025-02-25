@@ -1,0 +1,188 @@
+/* General Container and Layout */
+.mentors-container {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f7f7f7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden; */
+  /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    justify-content: flex-start;
+} 
+
+/* Header */
+/* .mentors-header {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+} */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Mentor List Section */
+.mentors-section {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.mentors-heading {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.mentors-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.mentor-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.mentor-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mentor-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.mentor-name {
+  font-size: 24px;
+  margin: 15px 0 5px;
+  color: #333;
+}
+
+.mentor-role {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #777;
+}
+
+.know-more-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.know-more-button:hover {
+  background-color: #1e4bb5;
+  transform: scale(1.05);
+}
+
+/* Mentor Details Section */
+.mentor-details-section {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.mentor-details-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+}
+
+.mentor-details-image {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+}
+
+.mentor-details-content {
+  padding: 20px;
+  width: 50%;
+}
+
+.mentor-details-name {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #2563eb;
+}
+
+.mentor-details-role {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #777;
+}
+
+.mentor-details-bio {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.social-links a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.social-links a:hover {
+  color: #1e4bb5;
+}
+
+.go-back-button {
+  background-color: #ccc;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.go-back-button:hover {
+  background-color: #999;
+  transform: scale(1.05);
+}

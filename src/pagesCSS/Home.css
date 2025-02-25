@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif; /* Replace with your preferred font */
+}
+
+
+
+
+.home-container {
+  min-height: 100vh;
+  
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+body {
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+
+background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+}
+
+
+
+
+
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 60px;
+  border-radius: 16px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background to improve text readability */
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 16px;
+  animation: fadeInDown 1s ease-in-out;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 15px rgba(0, 255, 255, 0.6);
+}
+
+.hero-subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-size: 24px;
+  color: white;
+  margin-bottom: 24px;
+  animation: fadeInUp 1s ease-in-out;
+  font-weight: 400;
+  /* text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.5); */
+}
+
+.button-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 24px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); */
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #4a5568;
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  background-color: #ffdd57;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+}
+
+.about-section {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  border-radius: 8px;
+  /* background: #2563eb; Blue background */
+  color: white; /* White text */
+  animation: slideInLeft 1s ease-in-out;
+  background: rgba(0, 0, 0, 0.6);
+  
+}
+
+.about-btn {
+  background-color: #2563eb;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.about-btn:hover {
+  background-color: #1e4bb5;
+  transform: scale(1.05);
+}
+
+.about-section .section-description {
+  color: white !important; /* Ensures the paragraph text is white */
+}
+.about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  border-radius: 8px;
+  z-index: -1;
+}
+.services-section,
+.testimonials-section,
+.contact-section {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 36px;
+  color: #2563eb;
+  font-weight: bold;
+  margin-bottom: 16px;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.section-description,
+.service-description,
+.testimonial-text,
+.contact-description {
+  font-size: 20px;
+  color: #333;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.services-section {
+  text-align: center;
+  margin-top: 40px;
+  padding: 40px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.6); /* Dark transparent background */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.services-list {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: nowrap; /* Ensures everything is in one row */
+  /* overflow-x: auto; Allows horizontal scrolling if needed */
+  padding-bottom: 10px; /* Adds some space for scroll */
+}
+
+.service-item {
+  max-width: 300px;
+  text-align: center;
+  padding: 20px;
+  background: transparent; /* Keeps background transparent */
+  border-radius: 8px;
+  box-shadow: none;
+  transition: transform 0.3s ease-in-out;
+  flex: 0 0 auto; /* Prevents shrinking */
+}
+
+.service-item:hover {
+  transform: scale(1.05);
+}
+
+.service-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px auto;
+  display: block;
+}
+
+.service-title {
+  font-size: 24px;
+  color: #ffdd57;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.service-description {
+  font-size: 18px;
+  color: #d1d1d1;
+}
+
+
+.testimonials-list {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.testimonial-item {
+  text-align: center;
+  max-width: 150px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.testimonial-item:hover {
+  transform: scale(1.1);
+}
+
+.testimonial-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.testimonial-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+
+.contact-description a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.reveal-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+html {
+  scroll-behavior: smooth;
+}

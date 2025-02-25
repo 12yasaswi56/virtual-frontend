@@ -1,0 +1,74 @@
+.slots-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .slots-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Slots Grid - 3 Slots Per Row */
+  .slots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 slots per row */
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Slot Card Styling */
+  .slot-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .slot-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Book Slot Button */
+  .slot-card button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px; /* Space between button and date/time */
+  }
+  
+  .slot-card button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Slot Date and Time (Displayed Below Button) */
+  .slot-card .slot-info {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 900px) {
+    .slots-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 slots per row on smaller screens */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .slots-grid {
+      grid-template-columns: repeat(1, 1fr); /* 1 slot per row on mobile */
+    }
+  }
+  

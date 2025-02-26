@@ -105,14 +105,37 @@ const Slots = () => {
   const [error, setError] = useState("");
 
   // Fetch available slots from the backend
+  // useEffect(() => {
+  //   const fetchSlots = async () => {
+  //     try {
+  //       const response = await fetch("https://virtual-backend-4.onrender.com/slots");
+  //       const data = await response.json();
+
+  //       if (response.ok) {
+  //         console.log("Fetched slots:", data);
+  //         setSlots(data);
+  //       } else {
+  //         setError("Failed to fetch slots");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching slots:", error);
+  //       setError("Error fetching slots. Try again later.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchSlots();
+  // }, []);
+
+
   useEffect(() => {
     const fetchSlots = async () => {
       try {
         const response = await fetch("https://virtual-backend-4.onrender.com/slots");
         const data = await response.json();
-
+        console.log("Fetched slots:", data); // Check if startTime and endTime exist
         if (response.ok) {
-          console.log("Fetched slots:", data);
           setSlots(data);
         } else {
           setError("Failed to fetch slots");
@@ -124,9 +147,10 @@ const Slots = () => {
         setLoading(false);
       }
     };
-
+  
     fetchSlots();
   }, []);
+  
 
   // Function to book a slot
   const handleBookSlot = async (slotId) => {
@@ -177,10 +201,16 @@ const Slots = () => {
       <div className="slots-grid">
         {slots.length > 0 ? (
           slots.map((slot) => (
+            // <div key={slot._id} className="slot-card">
+            //   <span>📅 {slot.date} - 🕒 {slot.time}</span>
+            //   <button onClick={() => handleBookSlot(slot._id)}>Book Slot</button>
+            // </div>
+
             <div key={slot._id} className="slot-card">
-              <span>📅 {slot.date} - 🕒 {slot.time}</span>
-              <button onClick={() => handleBookSlot(slot._id)}>Book Slot</button>
-            </div>
+  <span>📅 {slot.date} - 🕒 {slot.startTime} - {slot.endTime}</span>
+  <button onClick={() => handleBookSlot(slot._id)}>Book Slot</button>
+</div>
+
           ))
         ) : (
           <p className="no-slots">No slots available</p>

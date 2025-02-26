@@ -10,11 +10,13 @@ const ResetPassword = () => {
   const [error, setError] = useState("");
 
   const handleResetPassword = async () => {
+
     if (!newPassword) {
       setError("Please enter a new password.");
       return;
     }
-
+  
+    console.log("Sending request with:", { token, newPassword });
     try {
       const response = await fetch("https://virtual-backend-4.onrender.com/Resetpassword", {
         method: "POST",

@@ -16,7 +16,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await fetch("https://virtual-backend-4.onrender.com/reset-password", {
+      const response = await fetch("https://virtual-backend-4.onrender.com/Resetpassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

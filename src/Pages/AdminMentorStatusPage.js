@@ -132,7 +132,7 @@ const AdminMentorStatusPage = () => {
   // ✅ Handle Approve/Reject actions
   const handleStatusChange = async (email, status) => {
     try {
-      const response = await fetch("http://localhost:5000/update-status", {
+      const response = await fetch("https://virtual-backend-4.onrender.com/update-status", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -164,7 +164,7 @@ const AdminMentorStatusPage = () => {
   // ✅ Handle Availability Toggle (for Approved mentors)
   const toggleAvailability = async (email, currentAvailability) => {
     try {
-      const response = await fetch("http://localhost:5000/update-availability", {
+      const response = await fetch("https://virtual-backend-4.onrender.com/update-availability", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

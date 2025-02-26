@@ -116,6 +116,76 @@
 // export default AdminMeetings;
 
 
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import Footer from "../Components/Footer";
+
+// const AdminMeetings = () => {
+//   const [meetings, setMeetings] = useState([]);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const userEmail = localStorage.getItem("userEmail");
+//     const adminEmail = "yasaswikopparapu624@gmail.com"; // Admin Email
+
+//     if (userEmail !== adminEmail) {
+//       alert("Access Denied! Only Admins can view this page.");
+//       navigate("/"); // Redirect to home page or login page
+//       return;
+//     }
+
+//     fetch("https://virtual-backend-4.onrender.com/AdminMeetings")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         console.log("Fetched Meetings Data:", data); // Debugging log
+
+//         // Ensure the response is an array before setting state
+//         if (Array.isArray(data)) {
+//           setMeetings(data);
+//         } else {
+//           console.error("Expected an array but received:", data);
+//           setMeetings([]); // Avoid breaking UI if data is invalid
+//         }
+//       })
+//       .catch((err) => console.error("Error fetching meetings:", err));
+//   }, [navigate]);
+
+//   return (
+//     <div>
+//       <h2>Scheduled Meetings</h2>
+//       {meetings.length === 0 ? (
+//         <p>No meetings scheduled.</p>
+//       ) : (
+//         <ul>
+//           {meetings.map((meeting, index) => (
+//             <li key={meeting.roomId || index}>
+//               <strong>Date:</strong> {meeting.date || "N/A"} <br />
+//               <strong>Time:</strong> {meeting.time ? meeting.time : "Time not available"} <br />
+//               <strong>Booked By:</strong> {meeting.bookedBy || "Unknown"} <br />
+//               <strong>Room ID:</strong> {meeting.roomId ? meeting.roomId : "Room ID not available"} <br />
+//               {meeting.roomId ? (
+//                 <a href={`/room/${meeting.roomId}`} target="_blank" rel="noopener noreferrer">
+//                   Join Meeting
+//                 </a>
+//               ) : (
+//                 <p>Room link not available</p>
+//               )}
+//               <hr />
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default AdminMeetings;
+
+
+
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
@@ -139,12 +209,11 @@ const AdminMeetings = () => {
       .then((data) => {
         console.log("Fetched Meetings Data:", data); // Debugging log
 
-        // Ensure the response is an array before setting state
         if (Array.isArray(data)) {
           setMeetings(data);
         } else {
           console.error("Expected an array but received:", data);
-          setMeetings([]); // Avoid breaking UI if data is invalid
+          setMeetings([]);
         }
       })
       .catch((err) => console.error("Error fetching meetings:", err));
@@ -160,22 +229,22 @@ const AdminMeetings = () => {
           {meetings.map((meeting, index) => (
             <li key={meeting.roomId || index}>
               <strong>Date:</strong> {meeting.date || "N/A"} <br />
-              <strong>Time:</strong> {meeting.time ? meeting.time : "Time not available"} <br />
+              <strong>Time:</strong> {meeting.time ? meeting.time : "⏳ Time not set"} <br />
               <strong>Booked By:</strong> {meeting.bookedBy || "Unknown"} <br />
-              <strong>Room ID:</strong> {meeting.roomId ? meeting.roomId : "Room ID not available"} <br />
+              <strong>Room ID:</strong> {meeting.roomId ? meeting.roomId : "🚫 Room ID missing"} <br />
+              
               {meeting.roomId ? (
                 <a href={`/room/${meeting.roomId}`} target="_blank" rel="noopener noreferrer">
-                  Join Meeting
+                  🔗 Join Meeting
                 </a>
               ) : (
-                <p>Room link not available</p>
+                <p style={{ color: "red" }}>❌ Room link unavailable</p>
               )}
               <hr />
             </li>
           ))}
         </ul>
       )}
-
       <Footer />
     </div>
   );

@@ -8,7 +8,7 @@ const Footer = () => {
         
         {/* Left Section - Company Info */}
         <div style={styles.section}>
-          <h2 style={styles.title}>Virtual Incubator</h2>
+          <h2 style={styles.title}>H2Vis Incubator</h2>
           <p style={styles.description}>
             Empowering startups with mentorship, resources, and networking to
             accelerate growth and innovation.

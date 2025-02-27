@@ -530,6 +530,171 @@
 // export default Room;
 
 
+// import React, { useState, useEffect, useRef } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+// import io from "socket.io-client";
+// import SimplePeer from "simple-peer";
+
+// const socket = io("http://localhost:5000");
+
+// function Room() {
+//   const { roomId } = useParams();
+//   const navigate = useNavigate();
+//   const [peers, setPeers] = useState([]);
+//   const [messages, setMessages] = useState([]);
+//   const [participants, setParticipants] = useState([]);
+//   const userVideo = useRef();
+//   const peersRef = useRef([]);
+//   const userStream = useRef();
+//   const screenStreamRef = useRef(null);
+//   const [isMuted, setIsMuted] = useState(false);
+//   const [isVideoOn, setIsVideoOn] = useState(true);
+//   const [isScreenSharing, setIsScreenSharing] = useState(false);
+  
+//   const token = localStorage.getItem("token");
+//   const email = localStorage.getItem("userEmail");
+
+//   useEffect(() => {
+//     if (!token) {
+//       navigate("/login"); // Redirect if no token
+//       return;
+//     }
+
+//     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
+//       userVideo.current.srcObject = stream;
+//       userStream.current = stream;
+
+//       socket.emit("join-room", { roomId, email });
+
+//       socket.on("all-users", (users) => {
+//         const peersArray = users.map((user) => createPeer(user.userId, stream));
+//         peersRef.current = peersArray;
+//         setPeers(peersArray);
+//       });
+
+//       socket.on("user-joined", ({ userId, email }) => {
+//         const peer = createPeer(userId, stream);
+//         peersRef.current.push({ peerID: userId, peer, email });
+//         setPeers([...peersRef.current]);
+//         setParticipants((prev) => [...prev, { userId, email }]);
+//       });
+
+//       socket.on("receive-message", ({ message, email }) => {
+//         setMessages((prev) => [...prev, { message, email }]);
+//       });
+
+//       socket.on("hand-raised", ({ email }) => {
+//         alert(`${email} raised their hand!`);
+//       });
+
+//       socket.on("user-left", ({ userId }) => {
+//         setPeers((prev) => prev.filter((peer) => peer.peerID !== userId));
+//         setParticipants((prev) => prev.filter((p) => p.userId !== userId));
+//       });
+//     });
+
+//     return () => {
+//       socket.emit("leave-room", { roomId, email });
+//       socket.disconnect();
+//     };
+//   }, [email, navigate]);
+
+//   function createPeer(userToSignal, stream) {
+//     const peer = new SimplePeer({
+//       initiator: true,
+//       trickle: false,
+//       stream,
+//     });
+
+//     peer.on("signal", (signal) => {
+//       socket.emit("offer", { target: userToSignal, signal });
+//     });
+
+//     peer.on("stream", (remoteStream) => {
+//       let video = document.getElementById(`video-${userToSignal}`);
+//       if (video) {
+//         video.srcObject = remoteStream;
+//       }
+//     });
+
+//     return { peer, peerID: userToSignal };
+//   }
+
+//   const sendMessage = (msg) => {
+//     socket.emit("send-message", { roomId, message: msg, email });
+//   };
+
+//   const toggleMute = () => {
+//     userStream.current.getAudioTracks()[0].enabled = !isMuted;
+//     setIsMuted(!isMuted);
+//   };
+
+//   const toggleVideo = () => {
+//     userStream.current.getVideoTracks()[0].enabled = !isVideoOn;
+//     setIsVideoOn(!isVideoOn);
+//   };
+
+//   const toggleScreenShare = async () => {
+//     if (!isScreenSharing) {
+//       try {
+//         const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+//         screenStreamRef.current = screenStream;
+//         userStream.current.getVideoTracks()[0].stop();
+//         userStream.current = screenStream;
+//         setIsScreenSharing(true);
+//       } catch (error) {
+//         console.error("Error sharing screen: ", error);
+//       }
+//     } else {
+//       navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
+//         screenStreamRef.current.getTracks().forEach((track) => track.stop());
+//         userStream.current = stream;
+//         setIsScreenSharing(false);
+//       });
+//     }
+//   };
+
+//   const leaveMeeting = () => {
+//     socket.emit("leave-room", { roomId, email });
+//     navigate("/");
+//   };
+
+//   return (
+//     <div>
+//       <h2>Meeting Room: {roomId}</h2>
+//       <video ref={userVideo} autoPlay playsInline muted />
+      
+//       {peers.map(({ peerID }) => (
+//         <video key={peerID} id={`video-${peerID}`} autoPlay playsInline />
+//       ))}
+
+//       <div>
+//         <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
+//         <button onClick={toggleVideo}>{isVideoOn ? "Turn Off Camera" : "Turn On Camera"}</button>
+//         <button onClick={toggleScreenShare}>{isScreenSharing ? "Stop Sharing" : "Share Screen"}</button>
+//         <button onClick={() => socket.emit("hand-raise", { roomId, email })}>Raise Hand</button>
+//         <button onClick={leaveMeeting}>Leave Meeting</button>
+//       </div>
+
+//       <h3>Participants</h3>
+//       <ul>
+//         {participants.map((p, i) => (
+//           <li key={i}>{p.email}</li>
+//         ))}
+//       </ul>
+
+//       <h3>Chat</h3>
+//       <ul>
+//         {messages.map((msg, i) => (
+//           <li key={i}><b>{msg.email}:</b> {msg.message}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default Room;
+
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
@@ -550,13 +715,13 @@ function Room() {
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOn, setIsVideoOn] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
-  
+
   const token = localStorage.getItem("token");
   const email = localStorage.getItem("userEmail");
 
   useEffect(() => {
     if (!token) {
-      navigate("/login"); // Redirect if no token
+      navigate("/login");
       return;
     }
 
@@ -567,16 +732,27 @@ function Room() {
       socket.emit("join-room", { roomId, email });
 
       socket.on("all-users", (users) => {
-        const peersArray = users.map((user) => createPeer(user.userId, stream));
-        peersRef.current = peersArray;
+        const peersArray = users.map((user) => {
+          const peer = createPeer(user.userId, socket.id, stream);
+          peersRef.current.push({ peerID: user.userId, peer });
+          return { peer, peerID: user.userId };
+        });
         setPeers(peersArray);
+        setParticipants(users);
       });
 
       socket.on("user-joined", ({ userId, email }) => {
-        const peer = createPeer(userId, stream);
+        const peer = addPeer(userId, stream);
         peersRef.current.push({ peerID: userId, peer, email });
         setPeers([...peersRef.current]);
         setParticipants((prev) => [...prev, { userId, email }]);
+      });
+
+      socket.on("receiving-returned-signal", ({ signal, id }) => {
+        const item = peersRef.current.find((p) => p.peerID === id);
+        if (item) {
+          item.peer.signal(signal);
+        }
       });
 
       socket.on("receive-message", ({ message, email }) => {
@@ -599,25 +775,45 @@ function Room() {
     };
   }, [email, navigate]);
 
-  function createPeer(userToSignal, stream) {
-    const peer = new SimplePeer({
-      initiator: true,
-      trickle: false,
-      stream,
-    });
+  function createPeer(userToSignal, callerID, stream) {
+    const peer = new SimplePeer({ initiator: true, trickle: false, stream });
 
     peer.on("signal", (signal) => {
-      socket.emit("offer", { target: userToSignal, signal });
+      socket.emit("sending-signal", { userToSignal, callerID, signal });
     });
 
     peer.on("stream", (remoteStream) => {
-      let video = document.getElementById(`video-${userToSignal}`);
-      if (video) {
-        video.srcObject = remoteStream;
-      }
+      addRemoteVideo(userToSignal, remoteStream);
     });
 
-    return { peer, peerID: userToSignal };
+    return peer;
+  }
+
+  function addPeer(incomingSignal, callerID, stream) {
+    const peer = new SimplePeer({ initiator: false, trickle: false, stream });
+
+    peer.on("signal", (signal) => {
+      socket.emit("returning-signal", { signal, callerID });
+    });
+
+    peer.on("stream", (remoteStream) => {
+      addRemoteVideo(callerID, remoteStream);
+    });
+
+    peer.signal(incomingSignal);
+    return peer;
+  }
+
+  function addRemoteVideo(userId, stream) {
+    let video = document.getElementById(`video-${userId}`);
+    if (!video) {
+      video = document.createElement("video");
+      video.id = `video-${userId}`;
+      video.autoplay = true;
+      video.playsInline = true;
+      document.body.appendChild(video); // Add video element dynamically
+    }
+    video.srcObject = stream;
   }
 
   const sendMessage = (msg) => {
@@ -654,6 +850,10 @@ function Room() {
     }
   };
 
+  const raiseHand = () => {
+    socket.emit("hand-raise", { roomId, email });
+  };
+
   const leaveMeeting = () => {
     socket.emit("leave-room", { roomId, email });
     navigate("/");
@@ -663,16 +863,18 @@ function Room() {
     <div>
       <h2>Meeting Room: {roomId}</h2>
       <video ref={userVideo} autoPlay playsInline muted />
-      
-      {peers.map(({ peerID }) => (
-        <video key={peerID} id={`video-${peerID}`} autoPlay playsInline />
-      ))}
+
+      <div id="videos">
+        {peers.map(({ peerID }) => (
+          <video key={peerID} id={`video-${peerID}`} autoPlay playsInline />
+        ))}
+      </div>
 
       <div>
         <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
         <button onClick={toggleVideo}>{isVideoOn ? "Turn Off Camera" : "Turn On Camera"}</button>
         <button onClick={toggleScreenShare}>{isScreenSharing ? "Stop Sharing" : "Share Screen"}</button>
-        <button onClick={() => socket.emit("hand-raise", { roomId, email })}>Raise Hand</button>
+        <button onClick={raiseHand}>Raise Hand</button>
         <button onClick={leaveMeeting}>Leave Meeting</button>
       </div>
 
@@ -694,7 +896,6 @@ function Room() {
 }
 
 export default Room;
-
 
 // import React, { useState, useEffect, useRef } from "react";
 // import { useParams, useNavigate } from "react-router-dom";

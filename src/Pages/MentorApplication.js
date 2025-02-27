@@ -154,7 +154,6 @@ const MentorApplication = () => {
         <input type="text" name="resume" placeholder="Resume Link" value={formData.resume} onChange={handleChange} required />
         <button type="submit">Apply to Become a Mentor</button>
       </form>
-      <Footer />
     </div>
   );
 };

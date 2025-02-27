@@ -353,6 +353,8 @@ const AdminMentorStatusPage = () => {
             <tr>
               <th>Email</th>
               <th>Status</th>
+              <th>Resume link</th>
+              <th>experience</th>
               <th>Action</th>
               <th>Availability</th>
             </tr>
@@ -362,6 +364,8 @@ const AdminMentorStatusPage = () => {
               <tr key={mentor.email}>
                 <td>{mentor.email}</td>
                 <td>{mentor.status}</td>
+                <td>{mentor.resume}</td>
+                <td>{mentor.experience}</td>
                 <td>
                   {mentor.status === "Pending" ? (
                     <>

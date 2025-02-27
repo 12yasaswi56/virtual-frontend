@@ -552,7 +552,7 @@ function Room() {
   const [isScreenSharing, setIsScreenSharing] = useState(false);
   
   const token = localStorage.getItem("token");
-  const email = localStorage.getItem("email");
+  const email = localStorage.getItem("userEmail");
 
   useEffect(() => {
     if (!token) {

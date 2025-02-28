@@ -391,7 +391,7 @@ const styles = {
   forgotPassword: {
     textAlign: "right",
     fontSize: "14px",
-    color: "#333",
+    color: "white",
     cursor: "pointer",
   },
   loginButton: {

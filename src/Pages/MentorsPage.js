@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../pagesCSS/MentorsPage";
+import "../pagesCSS/MentorsPage.css";
 const MentorsPage = () => {
   const [mentors, setMentors] = useState([]);
   const [loading, setLoading] = useState(true);

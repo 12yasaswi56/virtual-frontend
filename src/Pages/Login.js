@@ -421,6 +421,7 @@ const styles = {
     fontSize: "14px",
   },
   orText: {
+    color:"white",
     marginTop: "20px",
     fontSize: "16px",
   },
@@ -444,6 +445,7 @@ const styles = {
     marginRight: "8px",
   },
   registerText: {
+    color:"white",
     marginTop: "20px",
     fontSize: "16px",
   },

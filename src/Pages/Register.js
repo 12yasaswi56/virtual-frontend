@@ -286,7 +286,7 @@ const Register = () => {
         {/* <div className="mobileContainer"> */}
        
           {/* <span className="flag">🇮🇳 +91</span> */}
-          <input type="text" name="mobile" placeholder="Mobile Number" value={formData.mobile} onChange={handleChange} className="mobileInput" />
+          <input type="text" name="mobile" placeholder="Mobile Number" value={formData.mobile} onChange={handleChange} className="input" />
         {/* </div> */}
         {errors.mobile && <p className="error">{errors.mobile}</p>}
 

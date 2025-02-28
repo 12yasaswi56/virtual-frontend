@@ -8,7 +8,6 @@ const Navbar = () => {
   const links = [
     { name: "Home", path: "/" },
     { name: "Contact Us", path: "/contact" },
-    { name: "Video Chat", path: "/videochat" },
     { name: "Login", path: "/login" },
     { name: "Register", path: "/register" },
     { name: "StartUp", path: "/startup" },

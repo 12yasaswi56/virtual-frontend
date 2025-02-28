@@ -27,10 +27,8 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/videochat" element={<VideoChat />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path="/AdminMeetings" element={<AdminMeetings />} />
-        <Route path="/room/:roomId" element={<Room />} />
         <Route path='/verify-otp' element={<OTPVerification />} />
         <Route path="/slots" element={<Slots />} />
         <Route path="/StartUp" element={<StartUp />} />

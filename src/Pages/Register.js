@@ -283,10 +283,11 @@ const Register = () => {
         <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} className="input" />
         {errors.email && <p className="error">{errors.email}</p>}
 
-        <div className="mobileContainer">
+        {/* <div className="mobileContainer"> */}
+       
           {/* <span className="flag">🇮🇳 +91</span> */}
           <input type="text" name="mobile" placeholder="Mobile Number" value={formData.mobile} onChange={handleChange} className="mobileInput" />
-        </div>
+        {/* </div> */}
         {errors.mobile && <p className="error">{errors.mobile}</p>}
 
         <input type="password" name="password" placeholder="Enter Password" value={formData.password} onChange={handleChange} className="input" />

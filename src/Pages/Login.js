@@ -324,13 +324,11 @@ const Login = () => {
 </span>
           </div>
           <p style={styles.forgotPassword}>
-<<<<<<< HEAD
+
             <Link to="/forgot-password" style={{ color: "white", textDecoration: "none" }}>
-=======
-            <Link to="/forgot-password" style={{ color: "#FFFFFF", textDecoration: "none" }}>
->>>>>>> 7180250 (Your commit message)
-              Forgot password?
-            </Link>
+             Forgot password?
+             </Link>
+            
           </p>
           <button style={styles.loginButton} onClick={handleLogin}>
             Login
@@ -350,7 +348,7 @@ const Login = () => {
               style={styles.googleIcon}
             />
             Login with <b>Google</b>
-          </button>
+</button>
 
         </>
       ) : (
@@ -396,11 +394,7 @@ const styles = {
   forgotPassword: {
     textAlign: "right",
     fontSize: "14px",
-<<<<<<< HEAD
     color: "white",
-=======
-    color: "#FFFFFF",
->>>>>>> 7180250 (Your commit message)
     cursor: "pointer",
   },
   loginButton: {

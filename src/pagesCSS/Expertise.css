@@ -1,5 +1,3 @@
-/* expertise.css */
-
 .expertise-container {
   padding: 20px;
   background-color: #f9f9f9;
@@ -113,7 +111,7 @@
   border-radius: 5px;
   font-size: 14px;
 }
-
 .close-btn:hover {
   background-color: #c82333;
+
 }

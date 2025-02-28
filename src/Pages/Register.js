@@ -284,7 +284,7 @@ const Register = () => {
         {errors.email && <p className="error">{errors.email}</p>}
 
         <div className="mobileContainer">
-          <span className="flag">🇮🇳 +91</span>
+          {/* <span className="flag">🇮🇳 +91</span> */}
           <input type="text" name="mobile" placeholder="Mobile Number" value={formData.mobile} onChange={handleChange} className="mobileInput" />
         </div>
         {errors.mobile && <p className="error">{errors.mobile}</p>}

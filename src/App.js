@@ -16,7 +16,7 @@ import MentorApplication from "./Pages/MentorApplication";
 import AdminMentorStatusPage from "./Pages/AdminMentorStatusPage";
 import ResetPassword from "./Pages/ResetPassword";
 import Expertise from "./Pages/Expertise";
-
+import MentorsPage from "./Pages/MentorsPage";
 const App = () => {
   return (
     <Router>

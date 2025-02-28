@@ -113,50 +113,79 @@ background-size: 400% 400%;
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
 }
-
 .about-section {
   text-align: center;
-  margin-top: 40px;
-  padding: 20px;
-  border-radius: 8px;
-  /* background: #2563eb; Blue background */
-  color: white; /* White text */
-  animation: slideInLeft 1s ease-in-out;
-  background: rgba(0, 0, 0, 0.6);
-  
+  margin: 0; /* No margin */
+  padding: 60px 10%; /* 10% padding from left & right for spacing */
+  background: linear-gradient(to right, #1e3a8a, #2563eb);
+  color: #ffffff;
+  animation: fadeInUp 1s ease-in-out;
+  width: 100%; /* Full width */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  z-index: 1;
+  box-sizing: border-box; /* Keeps padding inside width */
 }
 
+.section-description {
+  font-size: 18px;
+  line-height: 1.8;
+  color: white !important;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  max-width: 100%; /* Full width text if required */
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Button Styling (unchanged) */
 .about-btn {
-  background-color: #2563eb;
-  color: white;
-  font-size: 20px;
+  background: #ffffff;
+  color: #2563eb;
+  font-size: 22px;
   font-weight: bold;
   border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
+  padding: 14px 28px;
+  border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
 }
 
 .about-btn:hover {
-  background-color: #1e4bb5;
-  transform: scale(1.05);
+  background-color: #2563eb;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.about-section .section-description {
-  color: white !important; /* Ensures the paragraph text is white */
-}
 .about-section::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
   z-index: -1;
+  border-radius: 0; /* Remove radius to stretch to full width */
 }
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(40px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
 .services-section,
 .testimonials-section,
 .contact-section {

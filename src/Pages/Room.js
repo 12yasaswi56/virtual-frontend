@@ -206,6 +206,7 @@
 // export default Room;
 
 
+<<<<<<< HEAD
 
 
 
@@ -695,12 +696,21 @@
 
 // export default Room;
 
+=======
+>>>>>>> 7180250 (Your commit message)
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
+<<<<<<< HEAD
 import SimplePeer from "simple-peer";
 
 const socket = io("http://localhost:5000");
+=======
+import "../pagesCSS/Room.css";
+
+// Create socket connection
+const socket = io("https://virtual-backend-4.onrender.com");
+>>>>>>> 7180250 (Your commit message)
 
 function Room() {
   const { roomId } = useParams();
@@ -708,6 +718,7 @@ function Room() {
   const [peers, setPeers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [participants, setParticipants] = useState([]);
+<<<<<<< HEAD
   const userVideo = useRef();
   const peersRef = useRef([]);
   const userStream = useRef();
@@ -818,9 +829,205 @@ function Room() {
 
   const sendMessage = (msg) => {
     socket.emit("send-message", { roomId, message: msg, email });
+=======
+  const [handRaised, setHandRaised] = useState(false);
+  
+  // Refs
+  const videoRef = useRef(null);
+  const localStreamRef = useRef(null);
+  const peerConnectionsRef = useRef({});
+  
+  // State for remote video streams
+  const [remoteStreams, setRemoteStreams] = useState({});
+
+  useEffect(() => {
+    // Initialize media stream
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        // Set local stream
+        localStreamRef.current = stream;
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+
+        // Join room
+        socket.emit("join-room", { roomId, userId: socket.id });
+
+        // Socket event listeners
+        socket.on("user-joined", (userId) => {
+          console.log("User joined:", userId);
+          setParticipants((prev) => [...prev, userId]);
+          
+          // Create an offer to the new user
+          createPeerConnection(userId, true);
+        });
+
+        socket.on("user-left", (userId) => {
+          console.log("User left:", userId);
+          setParticipants((prev) => prev.filter((p) => p !== userId));
+          
+          // Clean up peer connection
+          if (peerConnectionsRef.current[userId]) {
+            peerConnectionsRef.current[userId].close();
+            const newPeerConnections = { ...peerConnectionsRef.current };
+            delete newPeerConnections[userId];
+            peerConnectionsRef.current = newPeerConnections;
+            
+            // Remove stream
+            setRemoteStreams((prev) => {
+              const newStreams = { ...prev };
+              delete newStreams[userId];
+              return newStreams;
+            });
+          }
+        });
+
+        // Handle offer received from peer
+        socket.on("offer", async ({ offer, userId }) => {
+          console.log("Received offer from:", userId);
+          // Create answer
+          const peerConnection = createPeerConnection(userId, false);
+          await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+          const answer = await peerConnection.createAnswer();
+          await peerConnection.setLocalDescription(answer);
+          
+          socket.emit("answer", {
+            answer,
+            to: userId,
+            from: socket.id
+          });
+        });
+
+        // Handle answer received
+        socket.on("answer", async ({ answer, from }) => {
+          console.log("Received answer from:", from);
+          const peerConnection = peerConnectionsRef.current[from];
+          if (peerConnection) {
+            await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+          }
+        });
+
+        // Handle ICE candidate
+        socket.on("ice-candidate", async ({ candidate, from }) => {
+          console.log("Received ICE candidate from:", from);
+          const peerConnection = peerConnectionsRef.current[from];
+          if (peerConnection) {
+            await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+          }
+        });
+
+        // Handle messages
+        socket.on("receive-message", (message) => {
+          setMessages((prev) => [...prev, message]);
+        });
+
+        // Handle hand raise event
+        socket.on("hand-raised", (userId) => {
+          alert(`${userId} raised their hand`);
+          setParticipants((prev) =>
+            prev.map((p) => (p === userId ? `${p} ✋` : p))
+          );
+        });
+      })
+      .catch((error) => {
+        console.error("Error accessing media devices:", error);
+        alert("Failed to access camera and microphone. Please check your permissions.");
+      });
+
+    // Cleanup function
+    return () => {
+      // Stop all tracks when component unmounts
+      if (localStreamRef.current) {
+        localStreamRef.current.getTracks().forEach((track) => track.stop());
+      }
+      
+      // Close all peer connections
+      Object.values(peerConnectionsRef.current).forEach(pc => pc.close());
+      
+      socket.disconnect();
+    };
+  }, [roomId]);
+
+  // Function to create and set up peer connection
+  const createPeerConnection = (userId, isInitiator) => {
+    console.log("Creating peer connection with:", userId, "Initiator:", isInitiator);
+    
+    // ICE servers for NAT traversal
+    const iceServers = {
+      iceServers: [
+        { urls: "stun:stun.l.google.com:19302" },
+        { urls: "stun:stun1.l.google.com:19302" }
+      ]
+    };
+    
+    // Create new RTCPeerConnection
+    const peerConnection = new RTCPeerConnection(iceServers);
+    peerConnectionsRef.current[userId] = peerConnection;
+    
+    // Add local tracks to the connection
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach((track) => {
+        peerConnection.addTrack(track, localStreamRef.current);
+      });
+    }
+    
+    // Set up event handlers for the peer connection
+    
+    // Handle ICE candidates
+    peerConnection.onicecandidate = (event) => {
+      if (event.candidate) {
+        socket.emit("ice-candidate", {
+          candidate: event.candidate,
+          to: userId,
+          from: socket.id
+        });
+      }
+    };
+    
+    // Handle connection state changes
+    peerConnection.onconnectionstatechange = (event) => {
+      console.log("Connection state change:", peerConnection.connectionState);
+    };
+    
+    // Handle receiving remote streams
+    peerConnection.ontrack = (event) => {
+      console.log("Received remote track from:", userId);
+      const [remoteStream] = event.streams;
+      setRemoteStreams((prev) => ({ ...prev, [userId]: remoteStream }));
+    };
+    
+    // If this peer is the initiator, create and send an offer
+    if (isInitiator) {
+      peerConnection.createOffer()
+        .then(offer => peerConnection.setLocalDescription(offer))
+        .then(() => {
+          socket.emit("offer", {
+            offer: peerConnection.localDescription,
+            to: userId,
+            from: socket.id
+          });
+        })
+        .catch(err => console.error("Error creating offer:", err));
+    }
+    
+    return peerConnection;
   };
 
+  // Chat functions
+  const sendMessage = () => {
+    if (newMessage.trim() === "") return;
+    
+    const messageObj = { text: newMessage, sender: "You" };
+    socket.emit("send-message", { roomId, message: newMessage });
+    setMessages(prev => [...prev, messageObj]);
+    setNewMessage("");
+>>>>>>> 7180250 (Your commit message)
+  };
+
+  // Media control functions
   const toggleMute = () => {
+<<<<<<< HEAD
     userStream.current.getAudioTracks()[0].enabled = !isMuted;
     setIsMuted(!isMuted);
   };
@@ -847,6 +1054,83 @@ function Room() {
         userStream.current = stream;
         setIsScreenSharing(false);
       });
+=======
+    if (localStreamRef.current) {
+      const audioTracks = localStreamRef.current.getAudioTracks();
+      audioTracks.forEach((track) => {
+        track.enabled = !track.enabled;
+      });
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const toggleCamera = () => {
+    if (localStreamRef.current) {
+      const videoTracks = localStreamRef.current.getVideoTracks();
+      videoTracks.forEach((track) => {
+        track.enabled = !track.enabled;
+      });
+      setIsCameraOn(!isCameraOn);
+    }
+  };
+
+  const toggleScreenShare = async () => {
+    try {
+      if (!isScreenSharing) {
+        const stream = await navigator.mediaDevices.getDisplayMedia({
+          video: true
+        });
+        
+        // Replace video track in all peer connections
+        const videoTrack = stream.getVideoTracks()[0];
+        Object.values(peerConnectionsRef.current).forEach(pc => {
+          const senders = pc.getSenders();
+          const videoSender = senders.find(sender => 
+            sender.track && sender.track.kind === 'video'
+          );
+          if (videoSender) {
+            videoSender.replaceTrack(videoTrack);
+          }
+        });
+        
+        // Update local video display
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+        
+        // Stop screen share when track ends
+        videoTrack.onended = () => {
+          toggleScreenShare();
+        };
+        
+        setIsScreenSharing(true);
+      } else {
+        // Revert to camera
+        const videoTrack = localStreamRef.current.getVideoTracks()[0];
+        Object.values(peerConnectionsRef.current).forEach(pc => {
+          const senders = pc.getSenders();
+          const videoSender = senders.find(sender => 
+            sender.track && sender.track.kind === 'video'
+          );
+          if (videoSender) {
+            videoSender.replaceTrack(videoTrack);
+          }
+        });
+        
+        if (videoRef.current) {
+          videoRef.current.srcObject = localStreamRef.current;
+        }
+        
+        setIsScreenSharing(false);
+      }
+    } catch (err) {
+      console.error("Error during screen sharing:", err);
+      if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+        alert("Screen sharing permission denied.");
+      } else {
+        alert("Error starting screen share: " + err.message);
+      }
+>>>>>>> 7180250 (Your commit message)
     }
   };
 
@@ -854,12 +1138,29 @@ function Room() {
     socket.emit("hand-raise", { roomId, email });
   };
 
+<<<<<<< HEAD
   const leaveMeeting = () => {
     socket.emit("leave-room", { roomId, email });
+=======
+  const handleLeaveMeeting = () => {
+    // Stop all tracks
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach((track) => track.stop());
+    }
+    
+    // Close all peer connections
+    Object.values(peerConnectionsRef.current).forEach(pc => pc.close());
+    
+    // Notify server
+    socket.emit("leave-room", { roomId, userId: socket.id });
+    
+    // Navigate back to home
+>>>>>>> 7180250 (Your commit message)
     navigate("/");
   };
 
   return (
+<<<<<<< HEAD
     <div>
       <h2>Meeting Room: {roomId}</h2>
       <video ref={userVideo} autoPlay playsInline muted />
@@ -891,6 +1192,84 @@ function Room() {
           <li key={i}><b>{msg.email}:</b> {msg.message}</li>
         ))}
       </ul>
+=======
+    <div className="room-container">
+      {/* Video Section */}
+      <div className="video-section">
+        <div className="video-grid">
+          <div className="video-box">
+            <video ref={videoRef} autoPlay playsInline muted></video>
+            {handRaised && <span className="hand-raised">✋</span>}
+            <div className="video-label">You</div>
+          </div>
+          
+          {/* Remote Videos */}
+          {Object.entries(remoteStreams).map(([userId, stream]) => (
+            <div className="video-box" key={userId}>
+              <video 
+                autoPlay 
+                playsInline 
+                ref={(element) => {
+                  if (element) element.srcObject = stream;
+                }}
+              ></video>
+              <div className="video-label">{userId}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Control Buttons */}
+        <div className="controls">
+          <button className={`control-btn ${isMuted ? 'active' : ''}`} onClick={toggleMute}>
+            {isMuted ? "Unmute" : "Mute"}
+          </button>
+          <button className={`control-btn ${!isCameraOn ? 'active' : ''}`} onClick={toggleCamera}>
+            {isCameraOn ? "Turn Off Camera" : "Turn On Camera"}
+          </button>
+          <button className={`control-btn ${isScreenSharing ? 'active' : ''}`} onClick={toggleScreenShare}>
+            {isScreenSharing ? "Stop Sharing" : "Share Screen"}
+          </button>
+          <button className={`control-btn hand-btn ${handRaised ? 'active' : ''}`} onClick={handleHandRaise}>
+            {handRaised ? "Lower Hand" : "Raise Hand"}
+          </button>
+          <button className="control-btn leave-btn" onClick={handleLeaveMeeting}>
+            Leave Meeting
+          </button>
+        </div>
+      </div>
+
+      {/* Chat Section */}
+      <div className="chat-section">
+        <div className="chat-box">
+          {messages.map((msg, index) => (
+            <p key={index}>
+              <strong>{msg.sender}:</strong> {msg.text}
+            </p>
+          ))}
+        </div>
+        <div className="chat-input">
+          <input
+            type="text"
+            placeholder="Type a message..."
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+          />
+          <button onClick={sendMessage}>Send</button>
+        </div>
+      </div>
+
+      {/* Participants List */}
+      <div className="participants-list">
+        <h3>Participants ({participants.length + 1})</h3>
+        <ul>
+          <li>You (host)</li>
+          {participants.map((p, index) => (
+            <li key={index}>{p}</li>
+          ))}
+        </ul>
+      </div>
+>>>>>>> 7180250 (Your commit message)
     </div>
   );
 }

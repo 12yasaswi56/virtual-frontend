@@ -131,13 +131,20 @@ const Home = () => {
       </div>
 
       <div ref={(el) => (sections.current[1] = el)} className="about-section reveal-section">
-        <button className="about-btn">About Us</button>
-        <p className="section-description">
-  H<sub>2</sub>Vis Incubators is dedicated to transforming innovative ideas into successful startups by
-  providing the necessary resources and guidance.
-</p>
-
-      </div>
+      <button className="about-btn">About Us</button>
+      <p className="section-description">
+          At <strong>H<sub>2</sub>Vis Incubators</strong>, we are committed to transforming innovative ideas into thriving startups 
+          by providing founders with expert mentorship, essential resources, and access to industry networks.<br /><br />
+  
+          Our collaborative ecosystem brings together entrepreneurs, seasoned mentors, and industry leaders 
+          to foster innovation, accelerate growth, and navigate challenges. Whether you are developing cutting-edge technology, 
+          disruptive business models, or solutions with deep social impact, we guide you every step of the way.<br /><br />
+  
+          From initial ideation to market entry, we ensure every visionary entrepreneur has the support, 
+          infrastructure, and funding opportunities needed to succeed in today’s dynamic business landscape.
+      </p>
+  </div>
+  
 
       <div ref={(el) => (sections.current[2] = el)} className="services-section reveal-section">
         <h2 className="section-title">Our Services</h2>

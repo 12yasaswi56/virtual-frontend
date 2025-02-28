@@ -7,7 +7,7 @@ const Navbar = () => {
   // Define links outside JSX
   const links = [
     { name: "Home", path: "/" },
-    { name: "Contact", path: "/contact" },
+    { name: "Contact Us", path: "/contact" },
     { name: "Video Chat", path: "/videochat" },
     { name: "Login", path: "/login" },
     { name: "Register", path: "/register" },

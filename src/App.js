@@ -16,7 +16,12 @@ import MentorApplication from "./Pages/MentorApplication";
 import AdminMentorStatusPage from "./Pages/AdminMentorStatusPage";
 import ResetPassword from "./Pages/ResetPassword";
 import Expertise from "./Pages/Expertise";
+<<<<<<< HEAD
 import MentorsPage from "./Pages/MentorsPage";
+=======
+
+
+>>>>>>> 7180250 (Your commit message)
 const App = () => {
   return (
     <Router>

@@ -13,21 +13,14 @@ const Footer = () => {
             Empowering startups with mentorship, resources, and networking to
             accelerate growth and innovation.
           </p>
-          <div style={styles.socialIcons}>
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" style={styles.icon}><FaFacebookF /></a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={styles.icon}><FaTwitter /></a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" style={styles.icon}><FaInstagram /></a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" style={styles.icon}><FaLinkedinIn /></a>
-          </div>
         </div>
 
         {/* Middle Section - Quick Links */}
         <div style={styles.section}>
           <h3 style={styles.subtitle}>Quick Links</h3>
           <ul style={styles.linkList}>
-            <li><a href="/about" style={styles.link}>About Us</a></li>
-            <li><a href="/services" style={styles.link}>Services</a></li>
-            <li><a href="/mentors" style={styles.link}>Mentors</a></li>
+            <li><a href="/" style={styles.link}>About Us</a></li>
+            <li><a href="/mentorapplication" style={styles.link}>Mentors</a></li>
             <li><a href="/contact" style={styles.link}>Contact Us</a></li>
           </ul>
         </div>
@@ -37,11 +30,21 @@ const Footer = () => {
           <h3 style={styles.subtitle}>Contact Us</h3>
           <p style={styles.contact}><FaMapMarkerAlt /> 203 NDM 2 Building Netaji Subhash Place Pitampura,Delhi-110034</p>
           <p style={styles.contact}><FaPhone /> +91 9911844555</p>
-          <p style={styles.contact}><FaEnvelope />hvisincubator@gmail.com</p>
+          <p style={styles.contact}><FaEnvelope /> hvisincubator@gmail.com</p>
         </div>
 
       </div>
+
+      {/* Copyright Line */}
       <p style={styles.copyright}>&copy; 2025 Virtual Incubator. All rights reserved.</p>
+
+      {/* Social Icons Centered Below Copyright */}
+      <div style={styles.socialIconsContainer}>
+        {/* <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" style={styles.icon}><FaFacebookF /></a> */}
+        {/* <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={styles.icon}><FaTwitter /></a> */}
+        <a href="https://www.instagram.com/h2vis_solution/?hl=en" target="_blank" rel="noopener noreferrer" style={styles.icon}><FaInstagram /></a>
+        <a href="https://www.linkedin.com/in/-harshitmittal/" target="_blank" rel="noopener noreferrer" style={styles.icon}><FaLinkedinIn /></a>
+      </div>
     </footer>
   );
 };
@@ -71,7 +74,7 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "10px",
     color: "white",
-    textAlign:"left",
+    textAlign: "left",
   },
   subtitle: {
     fontSize: "18px",
@@ -82,20 +85,6 @@ const styles = {
     fontSize: "14px",
     color: "#bbb",
     marginBottom: "15px",
-  },
-  socialIcons: {
-    display: "flex",
-    gap: "10px",
-    marginTop: "10px",
-  },
-  icon: {
-    color: "white",
-    fontSize: "18px",
-    textDecoration: "none",
-    padding: "10px",
-    borderRadius: "50%",
-    backgroundColor: "#444",
-    transition: "background 0.3s",
   },
   linkList: {
     listStyle: "none",
@@ -122,6 +111,21 @@ const styles = {
     fontSize: "14px",
     color: "#aaa",
     marginTop: "20px",
+  },
+  socialIconsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "15px",
+    marginTop: "10px",
+  },
+  icon: {
+    color: "white",
+    fontSize: "18px",
+    textDecoration: "none",
+    padding: "10px",
+    borderRadius: "50%",
+    backgroundColor: "#444",
+    transition: "background 0.3s",
   },
 };
 

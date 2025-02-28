@@ -417,6 +417,7 @@ const Contact = () => {
     <div className="contact-form-container">
      
       <h2>Contact Us</h2>
+      
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         {/* Form fields here */}
@@ -650,6 +651,7 @@ const Contact = () => {
             <option value="">Select Query Type</option>
             <option value="General">General</option>
             <option value="Technical">Technical</option>
+            <option value="Technical">Other</option>
           </select>
         </div>
 

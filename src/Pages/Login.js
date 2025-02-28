@@ -229,6 +229,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithGoogle, logout } from "../firebase";
+import { Eye, EyeOff } from 'lucide-react';
 import Footer from "../Components/Footer";
 
 const Login = () => {
@@ -316,14 +317,18 @@ const Login = () => {
               required
             />
             <span
-              style={styles.eyeIcon}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "🙈" : "👁️"}
-            </span>
+  style={styles.eyeIcon}
+  onClick={() => setShowPassword(!showPassword)}
+>
+  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+</span>
           </div>
           <p style={styles.forgotPassword}>
+<<<<<<< HEAD
             <Link to="/forgot-password" style={{ color: "white", textDecoration: "none" }}>
+=======
+            <Link to="/forgot-password" style={{ color: "#FFFFFF", textDecoration: "none" }}>
+>>>>>>> 7180250 (Your commit message)
               Forgot password?
             </Link>
           </p>
@@ -333,7 +338,7 @@ const Login = () => {
 
           <p style={styles.registerText}>
             Don't have an account? 
-            <Link to="/register" style={{ color: "#FF3C3C", textDecoration: "none", fontWeight: "bold" }}> Register Now</Link>
+            <Link to="/register" style={{ color: "#FFFFFF", textDecoration: "none", fontWeight: "bold" }}> Register Now</Link>
           </p>
           <p style={styles.orText}>
             <b>Login</b> with others
@@ -391,7 +396,11 @@ const styles = {
   forgotPassword: {
     textAlign: "right",
     fontSize: "14px",
+<<<<<<< HEAD
     color: "white",
+=======
+    color: "#FFFFFF",
+>>>>>>> 7180250 (Your commit message)
     cursor: "pointer",
   },
   loginButton: {
@@ -424,6 +433,7 @@ const styles = {
     color:"white",
     marginTop: "20px",
     fontSize: "16px",
+    color: "#FFFFFF",
   },
   googleButton: {
     width: "100%",
@@ -448,6 +458,7 @@ const styles = {
     color:"white",
     marginTop: "20px",
     fontSize: "16px",
+    color: "#FFFFFF",
   },
 };
 

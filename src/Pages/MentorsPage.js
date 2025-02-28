@@ -31,9 +31,6 @@ const MentorsPage = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Expertise</th>
-              <th>Experience</th>
-              <th>LinkedIn</th>
-              <th>Resume</th>
             </tr>
           </thead>
           <tbody>
@@ -42,17 +39,6 @@ const MentorsPage = () => {
                 <td>{mentor.name}</td>
                 <td>{mentor.email}</td>
                 <td>{mentor.expertise}</td>
-                <td>{mentor.experience} years</td>
-                <td>
-                  <a href={mentor.linkedin} target="_blank" rel="noopener noreferrer">
-                    LinkedIn
-                  </a>
-                </td>
-                <td>
-                  <a href={mentor.resume} target="_blank" rel="noopener noreferrer">
-                    View Resume
-                  </a>
-                </td>
               </tr>
             ))}
           </tbody>

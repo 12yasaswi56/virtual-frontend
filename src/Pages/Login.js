@@ -323,7 +323,7 @@ const Login = () => {
             </span>
           </div>
           <p style={styles.forgotPassword}>
-            <Link to="/forgot-password" style={{ color: "#333", textDecoration: "none" }}>
+            <Link to="/forgot-password" style={{ color: "white", textDecoration: "none" }}>
               Forgot password?
             </Link>
           </p>

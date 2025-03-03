@@ -115,7 +115,6 @@
 
 // export default AdminMeetings;
 
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
@@ -157,19 +156,18 @@ const AdminMeetings = () => {
       ) : (
         <ul>
           {meetings.map((meeting, index) => (
-            <li key={meeting.roomId || index}>
+            <li key={meeting.meetingLink || index}>
               <strong>Date:</strong> {meeting.date || "📅 Not Available"} <br />
               <strong>Start Time:</strong> {meeting.startTime || "⏳ Not Set"} <br />
               <strong>End Time:</strong> {meeting.endTime || "⏳ Not Set"} <br />
               <strong>Booked By:</strong> {meeting.bookedBy || "Unknown"} <br />
-              <strong>Room ID:</strong> {meeting.roomId ? meeting.roomId : "🚫 Missing"} <br />
 
-              {meeting.roomId ? (
-                <a href={`/room/${meeting.roomId}`} target="_blank" rel="noopener noreferrer">
+              {meeting.meetingLink ? (
+                <a href={meeting.meetingLink} target="_blank" rel="noopener noreferrer">
                   🔗 Join Meeting
                 </a>
               ) : (
-                <p style={{ color: "red" }}>❌ Room link unavailable</p>
+                <p style={{ color: "red" }}>❌ Meeting link unavailable</p>
               )}
               <hr />
             </li>
@@ -179,9 +177,75 @@ const AdminMeetings = () => {
       <Footer />
     </div>
   );
-};
+};  
 
 export default AdminMeetings;
+
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import Footer from "../Components/Footer";
+
+// const AdminMeetings = () => {
+//   const [meetings, setMeetings] = useState([]);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const userEmail = localStorage.getItem("userEmail");
+//     const adminEmail = "yasaswikopparapu624@gmail.com"; // Admin Email
+
+//     if (userEmail !== adminEmail) {
+//       alert("Access Denied! Only Admins can view this page.");
+//       navigate("/"); // Redirect to home page or login page
+//       return;
+//     }
+
+//     fetch("https://virtual-backend-4.onrender.com/AdminMeetings")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         console.log("Fetched Meetings Data:", data); // Debugging log
+
+//         if (Array.isArray(data)) {
+//           setMeetings(data);
+//         } else {
+//           console.error("Expected an array but received:", data);
+//           setMeetings([]);
+//         }
+//       })
+//       .catch((err) => console.error("Error fetching meetings:", err));
+//   }, [navigate]);
+
+//   return (
+//     <div>
+//       <h2>Scheduled Meetings</h2>
+//       {meetings.length === 0 ? (
+//         <p>No meetings scheduled.</p>
+//       ) : (
+//         <ul>
+//           {meetings.map((meeting, index) => (
+//             <li key={meeting.roomId || index}>
+//               <strong>Date:</strong> {meeting.date || "📅 Not Available"} <br />
+//               <strong>Start Time:</strong> {meeting.startTime || "⏳ Not Set"} <br />
+//               <strong>End Time:</strong> {meeting.endTime || "⏳ Not Set"} <br />
+//               <strong>Booked By:</strong> {meeting.bookedBy || "Unknown"} <br />
+
+//               {meeting.roomId ? (
+//                 <a href={`/room/${meeting.roomId}`} target="_blank" rel="noopener noreferrer">
+//                   🔗 Join Meeting
+//                 </a>
+//               ) : (
+//                 <p style={{ color: "red" }}>❌ Room link unavailable</p>
+//               )}
+//               <hr />
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default AdminMeetings;
 
 
 

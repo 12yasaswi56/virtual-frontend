@@ -174,7 +174,7 @@ const AdminMeetings = () => {
           ))}
         </ul>
       )}
-      <Footer />
+
     </div>
   );
 };  

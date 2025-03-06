@@ -159,7 +159,6 @@ const AdminMeetings = () => {
             <li key={meeting.meetingLink || index}>
               <strong>Date:</strong> {meeting.date || "📅 Not Available"} <br />
               <strong>Start Time:</strong> {meeting.startTime || "⏳ Not Set"} <br />
-              <strong>End Time:</strong> {meeting.endTime || "⏳ Not Set"} <br />
               <strong>Booked By:</strong> {meeting.bookedBy || "Unknown"} <br />
 
               {meeting.meetingLink ? (

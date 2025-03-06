@@ -1,7 +1,6 @@
 // firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-dotenv.config();
 const firebaseConfig = {
   apiKey: "AIzaSyCBY0XoJcbOALQzWKGX_QpDYX8B3fDQ4Jw",
   authDomain: "virtual-incubator-1d7dd.firebaseapp.com",

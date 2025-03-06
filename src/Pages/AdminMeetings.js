@@ -118,7 +118,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
-
+import "../pagesCSS/AdminMeeting.css"
 const AdminMeetings = () => {
   const [meetings, setMeetings] = useState([]);
   const navigate = useNavigate();

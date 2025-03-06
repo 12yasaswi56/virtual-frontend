@@ -1,10 +1,9 @@
 // firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import dotenv from "dotenv";
 dotenv.config();
 const firebaseConfig = {
-  apiKey: process.env.apiKey,
+  apiKey: "AIzaSyCBY0XoJcbOALQzWKGX_QpDYX8B3fDQ4Jw",
   authDomain: "virtual-incubator-1d7dd.firebaseapp.com",
   projectId: "virtual-incubator-1d7dd",
   storageBucket: "virtual-incubator-1d7dd.appspot.com",

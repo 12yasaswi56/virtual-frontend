@@ -188,7 +188,7 @@ const Home = () => {
             <p className="testimonial-name">H<sub>2</sub>Cal</p>
           </a>
 
-          <a href="https://ener-frontend.vercel.app/" target="_blank" rel="noopener noreferrer" className="testimonial-item">
+          <a href="https://preprint-frontend.vercel.app/" target="_blank" rel="noopener noreferrer" className="testimonial-item">
             <img src={enertransitionLogo} alt="Enertransition Logo" className="testimonial-logo" />
             <p className="testimonial-name">Enertransition</p>
           </a>

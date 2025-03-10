@@ -36,3 +36,5 @@ const logout = async () => {
 };
 
 export { auth, googleProvider, signInWithGoogle, logout };
+
+

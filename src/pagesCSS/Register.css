@@ -1,14 +1,14 @@
-/* Container */
+/* General Container */
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   padding: 20px;
-  gap: 30px;
-  flex-wrap: wrap; /* allow wrapping on smaller screens */
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 /* Left Section */
@@ -103,7 +103,6 @@
   overflow: hidden;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   margin: auto;
-  position: relative;
   text-align: center;
 }
 
@@ -135,48 +134,15 @@
   text-align: center;
 }
 
-/* 🔁 Media Queries for Responsiveness */
+/* ===========================
+   Responsive Design
+=========================== */
 
-/* Tablets and small laptops */
+/* Tablet (<=1024px) */
 @media (max-width: 1024px) {
-  .left, .right {
+  .left,
+  .right {
     width: 45%;
-  }
-
-  .slider-container {
-    width: 350px;
-    height: 350px;
-  }
-
-  .slider-image {
-    min-width: 250px;
-    min-height: 350px;
-  }
-}
-
-/* Tablets and large phones */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
-    padding: 10px;
-  }
-
-  .left, .right {
-    width: 100%;
-  }
-
-  .left h2 {
-    font-size: 20px;
-  }
-
-  .left p, .left a {
-    font-size: 14px;
-  }
-
-  .otpButton {
-    font-size: 15px;
   }
 
   .slider-container {
@@ -185,27 +151,35 @@
   }
 
   .slider-image {
-    min-width: 200px;
+    min-width: 250px;
     min-height: 300px;
-  }
-
-  .caption-container {
-    font-size: 14px;
   }
 }
 
-/* Phones */
-@media (max-width: 480px) {
+/* Mobile Devices (<=768px) */
+@media (max-width: 768px) {
   .container {
+    flex-direction: column;
     padding: 10px;
   }
 
-  .left h2 {
-    font-size: 18px;
+  .left,
+  .right {
+    width: 100%;
+    padding: 15px;
   }
 
-  .left p, .left a {
-    font-size: 13px;
+  .left h2 {
+    font-size: 20px;
+  }
+
+  .left p,
+  .left a {
+    font-size: 14px;
+  }
+
+  .right {
+    box-shadow: none;
   }
 
   .slider-container {
@@ -214,13 +188,35 @@
   }
 
   .slider-image {
-    min-width: 180px;
+    min-width: 200px;
     min-height: 250px;
   }
 
-  .otpButton {
-    padding: 10px;
+  .caption-container {
     font-size: 14px;
+  }
+}
+
+/* Small Mobile (<=480px) */
+@media (max-width: 480px) {
+  .otpButton {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .input,
+  .mobileInput {
+    font-size: 14px;
+  }
+
+  .slider-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .slider-image {
+    min-width: 180px;
+    min-height: 200px;
   }
 
   .caption-container {

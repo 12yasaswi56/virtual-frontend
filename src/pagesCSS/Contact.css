@@ -1,7 +1,5 @@
 .contact-page {
   min-height: 100vh;
-  
-
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,36 +7,35 @@
   justify-content: center;
   align-items: center;
   animation: fadeIn 1s ease-in-out;
+  padding: 20px;
 }
 
-
-
 .contact-form-container {
-  width: 50%;
-  margin: auto;
+  width: 60%;
+  max-width: 800px;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.9);
   font-family: 'Arial', sans-serif;
-  margin-top: 50px;
   animation: slideUp 1s ease-in-out;
 }
-/* Company Intro */
+
 .company-intro {
   text-align: center;
   max-width: 600px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
 }
+
 .company-intro h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
+
 .company-intro p {
   font-size: 16px;
   color: #555;
 }
-
 
 h2 {
   text-align: center;
@@ -72,7 +69,9 @@ form {
   margin-bottom: 5px;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -81,7 +80,9 @@ input, select, textarea {
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   border-color: #2563eb;
   box-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
 }
@@ -94,6 +95,7 @@ textarea {
 .form-row {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .form-row .form-group {
@@ -150,7 +152,8 @@ textarea {
 }
 
 @keyframes shake {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
   25% {
@@ -158,5 +161,54 @@ textarea {
   }
   75% {
     transform: translateX(5px);
+  }
+}
+
+/* Responsive Styles */
+
+/* Tablets and small laptops */
+@media (max-width: 1024px) {
+  .contact-form-container {
+    width: 80%;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .contact-form-container {
+    width: 100%;
+    padding: 15px;
+    margin-top: 30px;
+  }
+
+  .company-intro h2 {
+    font-size: 20px;
+  }
+
+  .company-intro p {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row .form-group {
+    width: 100%;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 10px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    padding: 10px;
   }
 }

@@ -68,7 +68,7 @@ h2 {
 }
 
 .error-message {
-  color: red;
+  color: #e67e22; /* soft orange instead of red */
   font-weight: bold;
 }
 

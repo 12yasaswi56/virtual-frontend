@@ -47,10 +47,55 @@ const Navbar = () => {
   );
 };
 
-// Styles
+// // Styles
+// const styles = {
+//   nav: {
+//     backgroundColor: "#000", // Dark background
+//     padding: "16px",
+//     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+//   },
+//   container: {
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     maxWidth: "1200px",
+//     margin: "0 auto",
+//     padding: "0 20px",
+//   },
+//   brand: {
+//     display: "flex",
+//     alignItems: "center",
+//   },
+//   logo: {
+//     height: "40px",
+//     marginRight: "12px",
+//   },
+//   title: {
+//     color: "white",
+//     fontSize: "22px",
+//     fontWeight: "bold",
+//     letterSpacing: "1px",
+//   },
+//   navList: {
+//     display: "flex",
+//     gap: "20px",
+//     listStyle: "none",
+//     margin: 0,
+//     padding: 0,
+//   },
+//   navItem: {
+//     position: "relative",
+//   },
+//   navLink: {
+//     textDecoration: "none",
+//     fontSize: "16px",
+//     transition: "color 0.3s ease",
+//   },
+// };
+
 const styles = {
   nav: {
-    backgroundColor: "#000", // Dark background
+    backgroundColor: "#000",
     padding: "16px",
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
   },
@@ -61,10 +106,12 @@ const styles = {
     maxWidth: "1200px",
     margin: "0 auto",
     padding: "0 20px",
+    flexWrap: "wrap", // allow wrapping on smaller screens
   },
   brand: {
     display: "flex",
     alignItems: "center",
+    marginBottom: "10px", // for small screens stacking
   },
   logo: {
     height: "40px",
@@ -78,7 +125,9 @@ const styles = {
   },
   navList: {
     display: "flex",
-    gap: "20px",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: "16px",
     listStyle: "none",
     margin: 0,
     padding: 0,
@@ -89,8 +138,35 @@ const styles = {
   navLink: {
     textDecoration: "none",
     fontSize: "16px",
+    color: "#fff",
     transition: "color 0.3s ease",
   },
+
+  // 👉 Add this manually as a CSS class in your stylesheet for mobile responsiveness
+  responsive: `
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-list {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .brand {
+        margin-bottom: 12px;
+      }
+
+      .nav-link {
+        font-size: 18px;
+        padding: 6px 0;
+      }
+    }
+  `,
 };
 
 export default Navbar;
